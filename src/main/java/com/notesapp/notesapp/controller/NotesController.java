@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -54,6 +56,16 @@ public class NotesController {
             model.addAttribute("wrongCredentials","UserName or Password is wrong !!");
             return "loginUser";
         }
+    }
+    @GetMapping("/logout")
+    public ModelAndView userLogout(HttpServletRequest request){
+        HttpSession session= request.getSession(false);
+        if(session != null)
+        {
+            session.invalidate();
+        }
+        ModelAndView mv = new ModelAndView("redirect:/");
+        return mv;
     }
 
 }
