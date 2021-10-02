@@ -3,6 +3,8 @@ package com.notesapp.notesapp.dao;
 import com.notesapp.notesapp.dbcon.DbConnection;
 import com.notesapp.notesapp.model.Notes;
 import com.notesapp.notesapp.model.User;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.net.URISyntaxException;
 import java.sql.*;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+@Repository
 public class NoresDao {
     public Connection connect() throws SQLException, URISyntaxException, ClassNotFoundException {
         return DbConnection.getConnection();

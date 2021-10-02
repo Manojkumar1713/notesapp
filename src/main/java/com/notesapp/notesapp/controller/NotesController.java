@@ -3,6 +3,7 @@ package com.notesapp.notesapp.controller;
 import com.notesapp.notesapp.dao.NoresDao;
 import com.notesapp.notesapp.model.Notes;
 import com.notesapp.notesapp.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,8 @@ import java.util.List;
 
 @Controller
 public class NotesController {
+    @Autowired
+    public NoresDao dao;
 
     @GetMapping("/")
     public String home() throws ClassNotFoundException {
@@ -30,13 +33,12 @@ public class NotesController {
     }
     @PostMapping("/save")
     public String saveUser(@ModelAttribute User user,Model model){
-        NoresDao noresDao = new NoresDao();
-        int count = noresDao.getUserName(user.getUsername());
+        int count = dao.getUserName(user.getUsername());
         if(count == 1){
             model.addAttribute("badUserName","User Name already existed");
             return "registerUser";
         }else {
-            int output = (int) noresDao.insertRecord(user);
+            int output = (int) dao.insertRecord(user);
         }
         return "redirect:/login";
     }
@@ -49,7 +51,6 @@ public class NotesController {
 
     @PostMapping("/login")
     public String loginToHome(@ModelAttribute User user, Model model, HttpSession session){
-        NoresDao dao = new NoresDao();
         int count = dao.validUser(user.getUsername(),user.getPassword());
         if(count == 1){
             session.setAttribute("userName",user.getUsername());
@@ -75,7 +76,6 @@ public class NotesController {
     }
     @GetMapping("/home/{user}")
     public String navigate(@PathVariable String user,Model model){
-        NoresDao dao = new NoresDao();
         List<Notes> notesList = null;
         notesList = (List<Notes>) dao.getAllNotes(user);
         model.addAttribute("notesList",notesList);
@@ -86,7 +86,6 @@ public class NotesController {
         System.out.println(noteId+" "+userName);
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
-        NoresDao dao = new NoresDao();
         Notes notes = new Notes();
         notes.setId(noteId);
         notes.setUser(userName);
@@ -102,7 +101,6 @@ public class NotesController {
     }
     @GetMapping("/delete/{userName}/{noteId}")
     public String delete(@PathVariable String userName, @PathVariable String noteId, Model model){
-        NoresDao dao = new NoresDao();
         dao.deleteNote(noteId,userName);
         List<Notes> notesList = null;
         notesList = (List<Notes>) dao.getAllNotes(userName);
@@ -111,7 +109,6 @@ public class NotesController {
     }
     @GetMapping("/edit/{userName}/{noteId}")
     public String editNote(@PathVariable String userName, @PathVariable String noteId, Model model){
-        NoresDao dao = new NoresDao();
         String[] note = dao.getNote(noteId,userName).split("#");
         List<Notes> notesList = null;
         notesList = (List<Notes>) dao.getAllNotes(userName);
@@ -134,13 +131,11 @@ public class NotesController {
         n.setTitle(notes[1]);
         n.setId(notes[0]);
         n.setUpdatedAt(formatter.format(date));
-        NoresDao dao = new NoresDao();
         dao.updateNote(n);
         return "homePage";
     }
     @GetMapping("/share/{userName}/{noteId}")
     public String shareNote(@PathVariable String userName, @PathVariable String noteId, Model model){
-        NoresDao dao = new NoresDao();
         String[] note = dao.getNote(noteId,userName).split("#");
         if(note.length == 2) {
             model.addAttribute("notesTitle", note[0]);
