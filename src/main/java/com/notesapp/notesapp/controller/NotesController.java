@@ -1,16 +1,19 @@
 package com.notesapp.notesapp.controller;
 
 import com.notesapp.notesapp.dao.NoresDao;
+import com.notesapp.notesapp.model.Notes;
 import com.notesapp.notesapp.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class NotesController {
@@ -50,6 +53,9 @@ public class NotesController {
         int count = dao.validUser(user.getUsername(),user.getPassword());
         if(count == 1){
             session.setAttribute("userName",user.getUsername());
+            List<Notes> notesList = null;
+            notesList = (List<Notes>) dao.getAllNotes(user.getUsername());
+            model.addAttribute("notesList",notesList);
             return "homePage";
         }
         else{
@@ -67,5 +73,69 @@ public class NotesController {
         ModelAndView mv = new ModelAndView("redirect:/");
         return mv;
     }
-
+    @GetMapping("/home/{user}")
+    public String navigate(@PathVariable String user,Model model){
+        NoresDao dao = new NoresDao();
+        List<Notes> notesList = null;
+        notesList = (List<Notes>) dao.getAllNotes(user);
+        model.addAttribute("notesList",notesList);
+        return "homePage";
+    }
+    @GetMapping("new/{title}/{userName}/{noteId}")
+    public String editNote(@PathVariable String noteId,@PathVariable String userName,@PathVariable String title, Model model){
+        System.out.println(noteId+" "+userName);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        NoresDao dao = new NoresDao();
+        Notes notes = new Notes();
+        notes.setId(noteId);
+        notes.setUser(userName);
+        notes.setTitle(title);
+        notes.setCreatedAt(formatter.format(date));
+        notes.setUpdatedAt("");
+        notes.setBody("Enter your Notes");
+        dao.insertNotes(notes);
+        List<Notes> notesList = null;
+        notesList = (List<Notes>) dao.getAllNotes(userName);
+        model.addAttribute("notesList",notesList);
+        return "homePage";
+    }
+    @GetMapping("/delete/{userName}/{noteId}")
+    public String delete(@PathVariable String userName, @PathVariable String noteId, Model model){
+        NoresDao dao = new NoresDao();
+        dao.deleteNote(noteId,userName);
+        List<Notes> notesList = null;
+        notesList = (List<Notes>) dao.getAllNotes(userName);
+        model.addAttribute("notesList",notesList);
+        return "redirect:/home/"+userName;
+    }
+    @GetMapping("/edit/{userName}/{noteId}")
+    public String editNote(@PathVariable String userName, @PathVariable String noteId, Model model){
+        NoresDao dao = new NoresDao();
+        String[] note = dao.getNote(noteId,userName).split("#");
+        List<Notes> notesList = null;
+        notesList = (List<Notes>) dao.getAllNotes(userName);
+        model.addAttribute("notesList",notesList);
+        model.addAttribute("notesTitle",note[0]);
+        model.addAttribute("notes",note[1]);
+        model.addAttribute("noteId",noteId);
+        return "homePage";
+    }
+    @PostMapping("/saveNote")
+    public String saveNote(@RequestBody String note){
+        System.out.println("TeSTing ----------");
+        System.out.println(note);
+        String[] notes = note.split("#");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        Notes n = new Notes();
+        n.setUser(notes[3]);
+        n.setBody(notes[2].trim());
+        n.setTitle(notes[1]);
+        n.setId(notes[0]);
+        n.setUpdatedAt(formatter.format(date));
+        NoresDao dao = new NoresDao();
+        dao.updateNote(n);
+        return "homePage";
+    }
 }

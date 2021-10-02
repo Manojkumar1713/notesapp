@@ -5,12 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
-    <title>Notes App MM</title>
+    <title>Sidebar template</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-   <style>
+    <style>
        @keyframes swing {
   0% {
     transform: rotate(0deg);
@@ -491,110 +490,275 @@ body {
 .chiller-theme .sidebar-footer>a:last-child {
     border-right: none;
 }
-/*----------------------------------------------------------------*/
-* { border-radius:0 !important; }
+.notes {
+    display: flex;
+    height: 100%;
+}
+
+.notes * {
+    font-family: sans-serif;
+}
+
+.notes__sidebar {
+    border-right: 2px solid #dddddd;
+    flex-shrink: 0;
+    overflow-y: auto;
+    padding: 1em;
+    width: 300px;
+}
+
+.notes__add {
+    background: #009578;
+    border: none;
+    border-radius: 7px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-bottom: 1em;
+    padding: 0.75em 0;
+    width: 100%;
+}
+
+.notes__add:hover {
+    background: #00af8c;
+}
+
+.notes__list-item {
+    cursor: pointer;
+}
+
+.notes__list-item--selected {
+    background: #eeeeee;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+.notes__small-title,
+.notes__small-updated {
+    padding: 10px;
+}
+
+.notes__small-title {
+    font-size: 1.2em;
+}
+
+.notes__small-body {
+    padding: 0 10px;
+}
+
+.notes__small-updated {
+    color: #aaaaaa;
+    font-style: italic;
+    text-align: right;
+}
+
+.notes__preview {
+    display: flex;
+    flex-direction: column;
+    padding: 2em 3em;
+    flex-grow: 1;
+}
+
+.notes__title,
+.notes__body {
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.notes__title {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.notes__body {
+    flex-grow: 1;
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin-top: 2em;
+    resize: none;
+}
+/* Base Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
 body {
-    font-family:"Open Sans", sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.6;
-    color: #494949;
-    background: #eaeaea;
-		margin: 5% 0;
-}
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    color: inherit;
-    font-family:"Raleway", sans-serif;
-    font-weight: 300;
-    line-height: 1.1;
+  color: #333333;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.6rem;
 }
 
-.title h1, .title h2, .title h3, .title h4 { margin: 5px; }
-.title {
-    position: relative;
-    display: block;
-    padding-bottom: 0;
-    border-bottom: 3px double #dcdcdc;
-    margin-bottom: 30px;
+button {
+  cursor: pointer;
 }
-	.title::before {
-		width: 15%;
-		height: 3px;
-		background: #53bdff;
-		position: absolute;
-		bottom: -3px;
-		content:'';
-	}
+
 a {
-    color: #53bdff;
-    text-decoration: none;
-    outline: 0;
+    color: #396684;
 }
-	a:hover {
-		color: #06a0ff;
-		text-decoration: none;
-	}
-p { margin: 10px 0; }
 
-/* ==========================================================================
-   WYSIWYG
-   ========================================================================== */
-#editor {
-	resize: vertical;
-	overflow: auto;
-	line-height: 1.5;
-	background-color: #fafafa;
-  background-image: none;
-	border: 0;
-  border-bottom: 1px solid #3b8dbd;
-	min-height: 450px;
-	box-shadow: none;
-	padding: 8px 16px;
-	margin: 0 auto;
-	font-size: 14px;
-	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+/* Container */
+
+.container {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0 1.6rem;
 }
-	#editor:focus {
-		background-color: #f0f0f0;
-		border-color: #38af5b;
-		box-shadow: none;
-		outline: 0 none;
-	}
 
-/* ==========================================================================
-   Buttons
-   ========================================================================== */
-.btn {
-  font-family:"Raleway", sans-serif;
+/* Header */
+
+.header {
+  background: #43799c;
+  color: white;
+  padding: 1.6rem 0;
+}
+
+.header__title {
+  font-size: 3.2rem;
+  margin-bottom: .4rem;
+}
+
+.header__subtitle {
+  font-size: 1.6rem;
   font-weight: 300;
-  font-size: 1em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  border: none;
-  border-bottom: .15em solid black;
-  padding: 0.65em 1.3em;
-}
-.btn-xs {
-	font-size: .80em;
-	padding: .25em .75em;
 }
 
-.btn-default {
-  border-color: #d9d9d9;
-  background-image: linear-gradient(#ffffff, #f2f2f2);
+/* Actions Bar */
+
+.actions {
+    background-color: #F7F7F7;
+    border-bottom: 1px solid #dedfe0;
+    padding: .8rem
 }
-	.btn-default:hover { background: linear-gradient(#f2f2f2, #e6e6e6); }
+
+.actions__container {
+    align-items: center;
+    display: flex;
+    max-width: 60rem;
+    margin: 0 auto;
+    min-height: 3rem;
+    padding: 0 1.6rem;
+}
+
+.actions__container--spaced {
+    justify-content: space-between
+}
+
+/* Form Inputs */
+
+.input {
+    border: 1px solid #DEDFE0;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 300;
+    height: 3rem;
+    margin-right: .8rem;
+    padding: .4rem .8rem;
+}
+
+.dropdown {
+    border-radius: 0;
+    border: 1px solid #DEDFE0;
+    background: white;
+    font-size: 1.4rem;
+    font-weight: 300;
+    height: 3rem;
+    margin-right: .8rem;
+}
+
+.button {
+    background: #43799c;
+    border: none;
+    border-bottom: 2px solid #396684;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 300;
+    padding: .8rem;
+    transition: background .3s ease;
+}
+
+.button:hover {
+    background: #396684;
+}
+
+.button--secondary {
+    background: #888888;
+    border-bottom: 2px solid #717171;
+}
+
+.button--secondary:hover {
+    background: #6E6E6E;
+}
+
+/* Note editor */
+
+.title-input {
+    border: 1px solid #DEDFE0;
+    font-size: 2rem;
+    font-weight: 300;
+    display: block;
+    margin: 2.4rem 0;
+    padding: .8rem;
+    width: 100%;
+}
+
+.body-input {
+    border: 1px solid #DEDFE0;
+    font-family: inherit;
+    font-size: 1.6rem;
+    font-weight: 300;
+    display: block;
+    margin: 2.4rem 0;
+    min-height: 15rem;
+    padding: .8rem;
+    width: 100%;
+}
+
+/* Note List Item */
+
+.list-item {
+    text-decoration: none;
+    color: #333333;
+    background: #F7F7F7;
+    border: 1px solid #dedfe0;
+    margin: 1.6rem 0;
+    padding: 1.6rem;
+    display: block;
+    transition: background .3s ease;
+}
+
+.list-item:hover {
+    background: #eeeeee;
+}
+
+.list-item__title {
+    font-size: 1.8rem;
+    margin-bottom: .4rem
+}
+
+.list-item__subtitle {
+    color: #666;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.empty-message {
+    text-align: center;
+    margin: 3.2rem 0;
+}
    </style>
 </head>
 
 <body>
-<script th:inline="javascript">
-    var userName = /*[[${session.userName}]]*/ 'default';
-     if(userName == null){
-        location.href = '/login';
-    }
-    console.log(userName);
-  </script>
 <div class="page-wrapper chiller-theme toggled">
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
@@ -616,7 +780,7 @@ p { margin: 10px 0; }
           <span class="user-name">Welcome
             <strong><p th:text="${session.userName}"></p></strong>
           </span>
-                    <span class="user-role">Keep your notes secure</span>
+                    <span class="user-role">Notes Creater</span>
                     <span class="user-status">
             <i class="fa fa-circle"></i>
             <span>Online</span>
@@ -627,7 +791,7 @@ p { margin: 10px 0; }
             <div class="sidebar-search">
                 <div>
                     <div class="input-group">
-                        <input id="searchbar" onkeyup="search_note()" type="text" class="form-control search-menu" placeholder="Search...">
+                        <input id="search-text" type="text" class="form-control search-menu" placeholder="Search...">
                         <div class="input-group-append">
               <span class="input-group-text">
                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -641,67 +805,35 @@ p { margin: 10px 0; }
                 <ul id="notes-menu">
                     <li class="header-menu" id="add">
                         <span>Notes List</span>
-                        <span>Create Note<i class="fa fa-plus"></i></span>
+                        <span><i class="fa fa-plus"></i></span>
                     </li>
                     <!-- loop to get all notes -->
-                    <li class ="sidebar-dropdown" th:each="note : ${notesList}">
+                    <li th:each="note : ${notesList}">
                         <a href="#">
                             <i class="fa fa-folder"></i>
                             <span th:text="${note.getTitle}"></span>
-
                         </a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li>
-                                    <a th:href="@{'/edit/'+${note.getUser}+'/'+${note.getId}}">Edit<span class="fas fa-edit float-right"></span></a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'/delete/'+${note.getUser}+'/'+${note.getId}}">Delete<span class="fa fa-trash float-right"></span></a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'/password/'+${note.getUser}+'/'+${note.getId}}">Lock<span class="fa fa-lock float-right"></span></a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
+
                     <!-- loop ends -->
                 </ul>
                 <input type="hidden" id ="count" value="0" />
             </div>
-            <!-- sidebar-menu  logout-->
+
             <script th:inline="javascript">
             var userName = /*[[${session.userName}]]*/ 'default';
-            function create_UUID(){
-                var dt = new Date().getTime();
-                var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                    var r = (dt + Math.random()*16)%16 | 0;
-                    dt = Math.floor(dt/16);
-                    return (c=='x' ? r :(r&0x3|0x8)).toString(16);
-                });
-                return uuid;
-            }
             $('#add').on('click',addNote);
                 function addNote(){
-                    const id = create_UUID();
-                    var title = prompt("Enter note title");
-                    location.href = "/new/"+title+"/"+userName+"/"+id;
+                    const id = uuidv4();
+                    alert("notes added");
+                    var count = parseInt($('#count').val()) + 1;
+                    var note = "<li id=note_"+count+"> <a href='edit/"+userName+"/"+id+"' onclick='goToNotes()'>"+
+                                "<i class='fa fa-folder'></i><span>New title</span></a></li>";
+                    $('#notes-menu').append(note);
+                    $('#count').val(count);
                 }
-            function search_note() {
-                let input = document.getElementById('searchbar').value
-                input=input.toLowerCase();
-                let x = document.getElementsByClassName('sidebar-dropdown');
-                console.log(x);
-                for (i = 0; i < x.length; i++) {
-                    if (!x[i].innerHTML.toLowerCase().includes(input)) {
-                        x[i].style.display="none";
-                    }
-                    else {
-                        x[i].style.display="list-item";
-                    }
-                }
-            }
             </script>
-
+            <!-- sidebar-menu  logout-->
         </div>
         <!-- sidebar-content  -->
         <div class="sidebar-footer">
@@ -715,94 +847,32 @@ p { margin: 10px 0; }
             alert("logout successfull !!")
         }
     </script>
+
+    <script th:inline="javascript">
+    var userName = /*[[${session.userName}]]*/ 'default';
+    console.log(userName);
+    if(userName == null){
+        location.assign('./login');
+    }
+  </script>
+
     <!-- sidebar-wrapper  -->
     <main class="page-content">
         <div class="container-fluid">
-            <div id="notesDiv" style="display:none;">
-                <div class="form-group">
-                    <label for="title" class="control-label"><h3>Title</h3></label>
-                    <input type="text" name="name" class="form-control" id="title" th:value="${notesTitle}">
-                    <input type="hidden" name="id" class="form-control" id="notesId" th:value="${noteId}">
-                </div>
-                <div id="editparent">
-                    <div id="editControls">
-                        <div class="btn-group">
-                            <a class="btn btn-xs btn-default" data-role="undo" href="#" title="Undo"><i class="fa fa-undo"></i></a>
-                            <a class="btn btn-xs btn-default" data-role="redo" href="#" title="Redo"><i class="fa fa-redo"></i></a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn btn-xs btn-default" data-role="bold" href="#" title="Bold"><i class="fa fa-bold"></i></a>
-                            <a class="btn btn-xs btn-default" data-role="italic" href="#" title="Italic"><i class="fa fa-italic"></i></a>
-                            <a class="btn btn-xs btn-default" data-role="underline" href="#" title="Underline"><i class="fa fa-underline"></i></a>
-                            <a class="btn btn-xs btn-default" data-role="strikeThrough" href="#" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn btn-xs btn-default" data-role="indent" href="#" title="Blockquote"><i class="fa fa-indent"></i></a>
-                            <a class="btn btn-xs btn-default" data-role="insertUnorderedList" href="#" title="Unordered List"><i class="fa fa-list-ul"></i></a>
-                            <a class="btn btn-xs btn-default" data-role="insertOrderedList" href="#" title="Ordered List"><i class="fa fa-list-ol"></i></a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn btn-xs btn-default" data-role="h1" href="#" title="Heading 1"><i class="fa fa-heading"></i><sup>1</sup></a>
-                            <a class="btn btn-xs btn-default" data-role="h2" href="#" title="Heading 2"><i class="fa fa-heading"></i><sup>2</sup></a>
-                            <a class="btn btn-xs btn-default" data-role="h3" href="#" title="Heading 3"><i class="fa fa-heading"></i><sup>3</sup></a>
-                        </div>
-                    </div>
-                    <div id="editor" contenteditable>
-                        <div th:utext="${notes}"></div>
-                    </div>
-                    <textarea name="ticketDesc" id="editorCopy" required="required" style="display:none;"></textarea>
-                </div>
-                    <button type="submit" onclick="loadValues();">Submit</button>
-            </div>
-            <p>
-                <a href="#" id="checkIt"><i class="fa fa-long-arrow-right"></i> See the Hidden textarea value</a>.
-            </p>
+
         </div>
     </main>
     <!-- page-content" -->
 </div>
-<script th:inline="javascript">
-     var title = /*[[${notesTitle}]]*/ 'default';
-            if(title != null){
-                document.getElementById('notesDiv').style.display = 'block';
-            }
-     async function loadValues(){
-        let noteId = document.getElementById('notesId').value;
-        let title = document.getElementById('title').value;
-        let notes = document.getElementById('editorCopy').value;
-        let send = noteId+"#"+title+"#"+notes+"#"+userName;
-        console.log(send);
-        try{
-            const res = await postData('/saveNote',send);
-            console.log(res);
-            alert("data saved");
-            setTimeout(function() {
-                location.href='/home/'+userName;
-            }, 3000);
-        }
-        catch(err){
-            console.log(err);
-        }
-     }
-     function postData(uri,send){
-      $.ajax({
-            type:'POST',
-            contentType : 'application/text; charset=utf-8',
-            dataType : 'text',
-            url:uri,
-            data:send,
-            success:function(data){
-                alert("Your Notes is saving");
-            }
-        });
-     }
-</script>
 <!-- page-wrapper -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment-with-locales.js"></script>
+
 <script>
     jQuery(function ($) {
 
@@ -836,33 +906,7 @@ $("#show-sidebar").click(function() {
 });
 
 
-$('#editControls a').click(function(e) {
-		e.preventDefault();
-		switch($(this).data('role')) {
-			case 'h1':
-			case 'h2':
-			case 'h3':
-			case 'p':
-				document.execCommand('formatBlock', false, $(this).data('role'));
-				break;
-			default:
-				document.execCommand($(this).data('role'), false, null);
-				break;
-		}
 
-		var textval = $("#editor").html();
-		$("#editorCopy").val(textval);
-	});
-
-	$("#editor").keyup(function() {
-		var value = $(this).html();
-		$("#editorCopy").val(value);
-	}).keyup();
-
-	$('#checkIt').click(function(e) {
-		e.preventDefault();
-		alert($("#editorCopy").val());
-	});
 
 });
 </script>
