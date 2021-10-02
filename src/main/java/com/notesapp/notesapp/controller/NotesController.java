@@ -138,4 +138,17 @@ public class NotesController {
         dao.updateNote(n);
         return "homePage";
     }
+    @GetMapping("/share/{userName}/{noteId}")
+    public String shareNote(@PathVariable String userName, @PathVariable String noteId, Model model){
+        NoresDao dao = new NoresDao();
+        String[] note = dao.getNote(noteId,userName).split("#");
+        if(note.length == 2) {
+            model.addAttribute("notesTitle", note[0]);
+            model.addAttribute("notes", note[1]);
+        }
+        else{
+            model.addAttribute("No","Oops !! The Notes you are looking for is deleted by "+userName);
+        }
+        return "edit";
+    }
 }
