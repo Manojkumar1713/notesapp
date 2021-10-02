@@ -29,6 +29,7 @@ public class NoresDao {
             System.out.println("Executed ---> "+SQL);
             rs.next();
             count = rs.getInt(1);
+            conn.close();
         } catch (SQLException | URISyntaxException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
@@ -45,6 +46,7 @@ public class NoresDao {
             preparedStatement.setString(2,u.getPassword());
             id = preparedStatement.executeUpdate();
             System.out.println("Executed ---> "+sql);
+            con.close();
         }catch(Exception e){
             System.out.println(e.getStackTrace());
         }
@@ -61,6 +63,7 @@ public class NoresDao {
             System.out.println("Executed ---> "+SQL);
             rs.next();
             count = rs.getInt(1);
+            conn.close();
         } catch (SQLException | URISyntaxException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
@@ -78,6 +81,7 @@ public class NoresDao {
             System.out.println("Executed ---> "+SQL);
             rs.next();
             count = rs.getInt(1);
+            conn.close();
         } catch (SQLException | URISyntaxException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
@@ -96,6 +100,7 @@ public class NoresDao {
             rs.next();
             note = rs.getString(1);
             note = note +"#"+ rs.getString(2);
+            conn.close();
         } catch (SQLException | URISyntaxException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
@@ -119,6 +124,7 @@ public class NoresDao {
             preparedStatement.setString(6,note.getUser());
             id = preparedStatement.executeUpdate();
             System.out.println("Executed ---> "+sql);
+            con.close();
         }catch(Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
@@ -134,6 +140,7 @@ public class NoresDao {
             preparedStatement.setString(3,note.getUpdatedAt());
             preparedStatement.executeUpdate();
             System.out.println("Executed ---> "+sql);
+            con.close();
         }catch(Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
@@ -158,6 +165,7 @@ public class NoresDao {
                 note.setUser(rs.getString(7));
                 notes.add(note);
             }
+            conn.close();
         }
         catch (SQLException | URISyntaxException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
@@ -173,6 +181,7 @@ public class NoresDao {
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.executeUpdate();
             System.out.println("Executed ---> "+sql);
+            con.close();
         }catch(Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
