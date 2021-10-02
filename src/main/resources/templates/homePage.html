@@ -775,7 +775,7 @@ p { margin: 10px 0; }
         try{
             const res = await postData('/saveNote',send);
             console.log(res);
-            alert("data saved");
+            alert("Your data is saving !!");
             setTimeout(function() {
                 location.href='/home/'+userName;
             }, 3000);
@@ -792,7 +792,7 @@ p { margin: 10px 0; }
             url:uri,
             data:send,
             success:function(data){
-                alert("Your Notes is saving");
+                alert("Data Saved !! Redirecting ");
             }
         });
      }
