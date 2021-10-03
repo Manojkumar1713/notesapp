@@ -4,7 +4,6 @@ import com.notesapp.notesapp.dbcon.DbConnection;
 import com.notesapp.notesapp.model.Notes;
 import com.notesapp.notesapp.model.User;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.net.URISyntaxException;
 import java.sql.*;
@@ -89,7 +88,7 @@ public class NoresDao {
         return count;
     }
     public String getNote(String id,String userName){
-        String SQL = "SELECT title,body FROM public.\"Notes\" where \"noteId\" ='"+id+"' and username='"+userName+"'";
+        String SQL = "SELECT title,body,createdat,updatedat FROM public.\"Notes\" where \"noteId\" ='"+id+"' and username='"+userName+"'";
         String note = "";
 
         try {
@@ -100,6 +99,8 @@ public class NoresDao {
             rs.next();
             note = rs.getString(1);
             note = note +"#"+ rs.getString(2);
+            note = note +"#"+ rs.getString(3);
+            note = note +"#"+ rs.getString(4);
             conn.close();
         } catch (SQLException | URISyntaxException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());

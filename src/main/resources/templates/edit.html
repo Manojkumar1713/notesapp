@@ -16,6 +16,11 @@
     &nbsp;&nbsp;&nbsp;<h3 th:text="${notesTitle}"></h3>
     <h1>Notes Body</h1>
     &nbsp;&nbsp;&nbsp;<h4 th:utext="${notes}"></h4>
+    <p>Created this note at: </p>
+    <p th:text="${createdAt}"></p>
+    <br>
+    <p>Last updated at:</p>
+    <p th:text="${updatedat}"></p>
 </div>
 </body>
 </html>

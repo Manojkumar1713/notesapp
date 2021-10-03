@@ -91,7 +91,7 @@ public class NotesController {
         notes.setUser(userName);
         notes.setTitle(title);
         notes.setCreatedAt(formatter.format(date));
-        notes.setUpdatedAt("");
+        notes.setUpdatedAt(formatter.format(date));
         notes.setBody("Enter your Notes");
         dao.insertNotes(notes);
         List<Notes> notesList = null;
@@ -137,9 +137,11 @@ public class NotesController {
     @GetMapping("/share/{userName}/{noteId}")
     public String shareNote(@PathVariable String userName, @PathVariable String noteId, Model model){
         String[] note = dao.getNote(noteId,userName).split("#");
-        if(note.length == 2) {
+        if(note.length == 4) {
             model.addAttribute("notesTitle", note[0]);
             model.addAttribute("notes", note[1]);
+            model.addAttribute("createdAt",note[2]);
+            model.addAttribute("updatedat",note[3]);
         }
         else{
             model.addAttribute("No","Oops !! The Notes you are looking for is deleted by "+userName);
