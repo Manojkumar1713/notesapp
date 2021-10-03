@@ -660,9 +660,6 @@ p { margin: 10px 0; }
                                     <a th:href="@{'/delete/'+${note.getUser}+'/'+${note.getId}}">Delete<span class="fa fa-trash float-right"></span></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{'/password/'+${note.getUser}+'/'+${note.getId}}">Lock<span class="fa fa-lock float-right"></span></a>
-                                </li>
-                                <li>
                                     <a th:href="@{'/share/'+${note.getUser}+'/'+${note.getId}}" target="_blank">Share this link<span class="fa fa-share float-right"></span></a>
                                 </li>
                             </ul>
