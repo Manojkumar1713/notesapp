@@ -684,8 +684,13 @@ p { margin: 10px 0; }
             $('#add').on('click',addNote);
                 function addNote(){
                     const id = create_UUID();
-                    var title = prompt("Enter note title");
-                    location.href = "/new/"+title+"/"+userName+"/"+id;
+                    var title = prompt("Enter note title","New title");
+                    if(title != null && title != ""){
+                        location.href = "/new/"+title+"/"+userName+"/"+id;
+                    }
+                    else{
+                        alert("Title cannot be Empty");
+                    }
                 }
             function search_note() {
                 let input = document.getElementById('searchbar').value

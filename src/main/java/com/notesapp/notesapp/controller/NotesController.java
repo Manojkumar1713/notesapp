@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -84,8 +84,8 @@ public class NotesController {
     @GetMapping("new/{title}/{userName}/{noteId}")
     public String editNote(@PathVariable String noteId,@PathVariable String userName,@PathVariable String title, Model model){
         System.out.println(noteId+" "+userName);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime date = LocalDateTime.now();
         Notes notes = new Notes();
         notes.setId(noteId);
         notes.setUser(userName);
@@ -123,8 +123,8 @@ public class NotesController {
         System.out.println("TeSTing ----------");
         System.out.println(note);
         String[] notes = note.split("#");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime date = LocalDateTime.now();
         Notes n = new Notes();
         n.setUser(notes[3]);
         n.setBody(notes[2].trim());
